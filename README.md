@@ -24,7 +24,7 @@ This is a solution to the [Blog preview card challenge on Frontend Mentor](https
 ### Links
 
 - Solution Github Repo URL: [Solution repo](https://github.com/cepoumian/blog-preview-card)
-- Live Site URL: [Solution live](https://cepo-qr-code.netlify.app/)
+- Live Site URL: [Solution live](https://cepo-blog-preview-card.netlify.app/)
 
 ## My process
 
@@ -111,15 +111,57 @@ On the other hand, I also wanted to leverage CSS layers as a way of organizing s
 }
 ```
 
+```css
+@layer utilities {
+  .text\:center {
+    text-align: center;
+  }
+
+  .bg\:light {
+    background-color: var(--background-light);
+  }
+}
+```
+
 Finally, I wanted to apply recently gained knowledge related to Web Components. I figured the "Tag" (which in this design is the yellow one that reads "Learning") would be a good opportunity to create a web component which could be potentially reused later.
 
 ![Screenshot of the pill web component](./assets/images/pill.png)
 
+The web component I ended up creating is extremely simple, and I'd still need to make it more customizable (change colors for example), but to get a grasp on the basics of web components It'd do.
+
+```js
+const template = document.createElement("template");
+template.innerHTML = `
+  <style>
+    span {
+      background-color: var(--clr-yellow);
+      padding: calc(var(--spacing-xs) / 2) var(--spacing-xs);
+      border-radius: calc(var(--spacing-sm) / 4);
+    }
+  </style>
+  <span>
+    <slot></slot>
+  </span>
+`;
+
+class PillComponent extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+}
+
+customElements.define("pill-c", PillComponent);
+```
+
 ### Useful resources
+
+- [Web Components Book](https://coryrylan.gumroad.com/l/web-component-essentials?layout=profile) - One valuable resource I'm using to learn about web components.
 
 - [Every Layout](https://www.example.com) - This is, by far, one of the most valuable resources on CSS and web layout I've found. Highly recomended.
 
-- Kevin Powell (Frontend Master's course)[https://frontendmasters.com/courses/pro-css/] - One of CSS's greatest educators.
+- [Kevin Powell's Frontend Master's course](https://frontendmasters.com/courses/pro-css/) - One of CSS's greatest educators.
 
 ## Author
 
