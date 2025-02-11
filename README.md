@@ -38,7 +38,52 @@ This is a solution to the [Blog preview card challenge on Frontend Mentor](https
 
 ### What I learned
 
-In this mini project I wanted to focus on what I've learned from the [Every Layout](https://every-layout.dev/) CSS methodology.
+In this mini project, I wanted to apply recently gained knowledge related to Web Components. I figured the "Tag" (which in this design is the yellow one that reads "Learning") would be a good opportunity to create a web component which could be potentially reused later.
+
+![Screenshot of the pill web component](./assets/images/pill.png)
+
+By accepting custom attributes for background and text colors, this component becomes somwhat reusable, although more work would be needed to make it more customizable.
+
+```js
+const template = document.createElement("template");
+
+template.innerHTML = /* html */ `
+  <style>
+    span {
+      padding: calc(var(--spacing-xs) / 2) var(--spacing-xs);
+      border-radius: calc(var(--spacing-sm) / 4);
+    }
+  </style>
+  <span>
+    <slot></slot>
+  </span>
+`;
+
+class PillComponent extends HTMLElement {
+  static get observedAttributes() {
+    return ["bg-color", "text-color"];
+  }
+
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === "bg-color") {
+      this.shadowRoot.querySelector("span").style.backgroundColor = newValue;
+    }
+    if (name === "text-color") {
+      this.shadowRoot.querySelector("span").style.color = newValue;
+    }
+  }
+}
+
+customElements.define("pill-c", PillComponent);
+```
+
+I also wanted to keep focusing on what I've learned from the [Every Layout](https://every-layout.dev/) CSS methodology.
 
 The Every Layout book proposes an approach to layout based on classes or web components that tackle one specific task at a time. It also makes special emphasis on utilizing css logical properties (inline, block, etc.) instead of properties that would only work in horizontal-tb writing modes (e.g., margin-block-start instead of margin-top).
 
@@ -97,7 +142,7 @@ Every Layout also propses an approach to creating, using and naming utility clas
 </div>
 ```
 
-On the other hand, I also wanted to leverage CSS layers as a way of organizing styles and managing specificity, as suggested by Kevin Powell in his (Frontend Master's course)[https://frontendmasters.com/courses/pro-css/].
+Finally, I also wanted to keep leveraging CSS layers as a way of organizing styles and managing specificity, as suggested by Kevin Powell in his (Frontend Master's course)[https://frontendmasters.com/courses/pro-css/].
 
 ```css
 @layer utilities {
@@ -121,38 +166,6 @@ On the other hand, I also wanted to leverage CSS layers as a way of organizing s
     background-color: var(--background-light);
   }
 }
-```
-
-Finally, I wanted to apply recently gained knowledge related to Web Components. I figured the "Tag" (which in this design is the yellow one that reads "Learning") would be a good opportunity to create a web component which could be potentially reused later.
-
-![Screenshot of the pill web component](./assets/images/pill.png)
-
-The web component I ended up creating is extremely simple, and I'd still need to make it more customizable (change colors for example), but to get a grasp on the basics of web components It'd do.
-
-```js
-const template = document.createElement("template");
-template.innerHTML = `
-  <style>
-    span {
-      background-color: var(--clr-yellow);
-      padding: calc(var(--spacing-xs) / 2) var(--spacing-xs);
-      border-radius: calc(var(--spacing-sm) / 4);
-    }
-  </style>
-  <span>
-    <slot></slot>
-  </span>
-`;
-
-class PillComponent extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
-  }
-}
-
-customElements.define("pill-c", PillComponent);
 ```
 
 ### Useful resources
