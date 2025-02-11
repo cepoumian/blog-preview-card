@@ -15,18 +15,34 @@
     <title>Blog preview card</title>
   </head>
   <body>
-    <h1>Blog preview card</h1>
-    <p>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio quasi rem
-      dolor quidem, sequi distinctio illo quam deleniti? Quas tempore
-      praesentium possimus dignissimos blanditiis architecto labore voluptatem
-      nulla itaque fugit. Minima dolorem, blanditiis tempora consectetur est
-      quae magni non maxime cum repellendus molestiae, porro illo in. Atque
-      incidunt alias, nam ex ab, laudantium cum veniam beatae ipsum enim odio
-      quisquam? Debitis quisquam dolorum odit, doloremque amet tenetur illum
-      quia. Voluptatum enim eaque fugiat recusandae cupiditate odit quo, vel
-      alias nobis repellat fugit similique est id! Nisi, veritatis illo! Omnis,
-      dignissimos?
-    </p>
+    <main class="cover bg:light">
+      <div class="box card">
+        <img
+          src="/assets/images/illustration-article.svg"
+          alt="Abstract illustration depicting code"
+        />
+        <div class="stack info">
+          <pill-c>Learning</pill-c>
+          <p class="date">Published 21 Dec 2023</p>
+          <a href="#">
+            <h1 class="heading">HTML & CSS foundations</h1>
+          </a>
+          <p class="summary">
+            These languages are the backbone of every website, defining
+            structure, content, and presentation.
+          </p>
+        </div>
+        <div class="avatar box">
+          <img
+            class="avatar"
+            data-block="image"
+            src="/assets/images/image-avatar.webp"
+            alt="Avatar"
+          />
+          <span class="avatar" data-block="name">Greg Hopper</span>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="/components/pill.js"></script>
   </body>
 </html>
