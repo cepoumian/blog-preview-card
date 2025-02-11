@@ -1,0 +1,162 @@
+@font-face {
+  font-family: "Figtree";
+  src: url("/fonts/Figtree-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/fonts/Figtree-ExtraBold.ttf");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/ */
+  html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure,
+  blockquote,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  /* https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html */
+  [role="list"] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-block-size: 100vh;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  button,
+  input,
+  label {
+    line-height: 1.1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  img,
+  picture {
+    max-inline-size: 100%;
+    display: block;
+  }
+}
+
+@layer base {
+  /* Primitives */
+  :root {
+    --clr-white: hsl(0, 0%, 100%);
+    --clr-black: hsl(0, 0%, 0%);
+    --clr-yellow: hsl(47, 88%, 63%);
+    --clr-gray-500: hsl(0, 0%, 42%);
+    --clr-gray-950: hsl(0, 0%, 7%);
+
+    --ff: "Figtree", sans-serif;
+
+    --fs-14: 0.875rem;
+    --fs-16: 1rem;
+    --fs-24: 1.5rem;
+
+    --fw-extra-bold: 800;
+    --fw-medium: 500;
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2.5rem;
+
+    --border-radius-1: 0.625rem;
+    --border-radius-2: 1.25rem;
+
+    --line-height-s: 1.2;
+    --line-height-m: 1.5;
+    --letter-spacing-w: 0.013em;
+    --letter-spacing-n: 0;
+
+    /* Semantic Layer */
+    /* in another selector for syntax highlighting reasons only */
+  }
+  :root {
+    --measure: 60ch;
+
+    --text-main: var(--clr-slate-500);
+    --text-high-contrast: var(--clr-slate-900);
+
+    --background-white: var(--clr-white);
+    --background-light: var(--clr-slate-300);
+  }
+}
+
+@layer base {
+  html {
+    font-family: var(--ff);
+    line-height: var(--line-height-m);
+  }
+
+  body {
+    font-size: var(--fs-300);
+    color: var(--text-main);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    max-inline-size: var(--measure);
+    color: var(--text-high-contrast);
+  }
+
+  p {
+    max-inline-size: var(--measure);
+  }
+
+  img {
+    border-radius: var(--border-radius-1);
+  }
+}
+
+@layer layout {
+}
+
+@layer components {
+}
+
+@layer utilities {
+}
